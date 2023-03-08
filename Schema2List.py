@@ -36,7 +36,6 @@ for x in splitted:
     elif x.startswith("."):
         x = x.strip(".")
         x = x + (" " * (21 - len(x)))
-        print(">" + x + "<")
         for char in x:
             if char not in replace.keys(): exit("Unknown character found: " + str(char))
             cache[list_depth-1].append(replace[char])
