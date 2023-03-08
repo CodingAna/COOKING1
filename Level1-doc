@@ -1,53 +1,9 @@
- CLCLC         DD    O
-                     O
-                     O
- I  I  I             O
-                     O
-                     O
- CLCLC               O
-OOOOOOOOOOOOOOOOOOOOOO
-
-  0: Air
-C/3: Cutting Board
-D/5: Delivery
-I/2: Inventory
-L/1: Ledge
-P/6: Plate Dispenser
-S/4: Stove
-
+Lists:
 List 1 (Render / World design):
-031313000000006550000
-000000000000000000000
-000000000000000000000
-020020020000000000000
-000000000000000000000
-000000000000000000000
-031313000000000000000
-
 List 2 (States):
-000000000000001000000
-000000000000000000000
-000000000000000000000
-020020020000000000000
-000000000000000000000
-000000000000000000000
-000000000000000000000
-
 List 3 (Chop/Usage or Stack Count States):
-000000000000000000000
-000000000000000000000
-000000000000000000000
-000000000000000000000
-000000000000000000000
-000000000000000000000
-000000000000000000000
 
-States explained:
-0: Air
-1: Plate
-2: Lettuce
-
-Variables explained:
+Variables:
 A: Temporary variable
 B: Temporary variable
 C: Count to chop item (global)
@@ -84,4 +40,3 @@ K-States (Key press codes):
 78: Shift (Chop)
 
 TODO:
-Write a compiler so I dont have to use this fucking language ever again. I hate missing out comments and slightly prettier code than CASIO BASIC. Bruh.
