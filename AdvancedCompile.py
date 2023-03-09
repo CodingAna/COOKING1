@@ -9,10 +9,15 @@ out = ["'ProgramMode:RUN"]
 splitted = tabbed.split("\n")
 cache = []
 
-# Remove space prefixes
 for x in splitted:
+    # Remove space prefixes
     while x.startswith(" "):
         x = x.removeprefix(" ")
+    # Remove comments
+    if x.startswith("#"): continue
+    # Remove blank lines
+    if x == "": continue
+
     cache.append(x)
 
 splitted = cache
@@ -35,10 +40,6 @@ try:
     for i in range(len(splitted)):
         x = splitted[i]
         if prev_line.startswith("Else") and prev_line != "Else":
-            #print(prev_line)
-            #print(x)
-            #print(i-1)
-            #print(len(cache))
             cache[i] = x
             prev_line = x
             continue
@@ -59,7 +60,6 @@ except:
     print(i)
     print(prev_line)
     print(x)
-#print("\n".join(fill_space(i, 3) + ": " + cache[i] for i in range(len(cache))))
 
 splitted = cache
 cache = []
