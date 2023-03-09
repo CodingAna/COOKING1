@@ -1,7 +1,12 @@
 Lists:
-List 1 (Render / World design):
-List 2 (States):
-List 3 (Chop/Usage or Stack Count States):
+List 1: Render / World design
+List 2: States
+List 3: Chop/Usage or Stack Count States
+List 4: Animation type and duration ({x,y,n,m}, n=type, m=current duration)
+
+Animations:
+0: None
+1: _#E5EE_
 
 Variables:
 A: Temporary variable
