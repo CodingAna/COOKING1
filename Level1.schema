@@ -1,11 +1,11 @@
 -----
  /0: Air
-C/3: Cutting Board
-D/5: Delivery
-I/2: Inventory
-L/1: Ledge
-P/6: Plate Dispenser
-S/4: Stove
+C/3: Cutting Board (_#E59E_)
+D/5: Delivery (_#E6A9_)
+I/2: Inventory (_#E6A7_)
+L/1: Ledge (_#E6A5_)
+P/6: Plate Dispenser (_#E6A4_)
+S/4: Stove (_#E6A3_)
 ,.....................
 . LLCLCLCLL       PDD
 .
@@ -16,13 +16,14 @@ S/4: Stove
 .     LCLLCL
 -----
  /0: Air
-L/2: Lettuce
+L/2: Lettuce (_#E6A0_)
 P/1: Plate
+T/3: Tomato (@)
 ,.....................
 .                 P
 .
 .
-.     L    L
+.     T    L
 .
 .
 .
