@@ -29,6 +29,9 @@
 {21,1,1,0}->SneakyList
 
 1000->ABC
+If ABC=100
+  Locate 1,2,"YURRR"
+IfEnd
 
 While K<>47 # Same line comment test
   K->J

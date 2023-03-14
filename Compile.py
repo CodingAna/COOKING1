@@ -82,36 +82,65 @@ for variable in variables:
 print(variables)
 print()
 print(out_variables)
+print()
 
 # Replace variable names with ALLOWED_VARIABLE_NAMES / Lists / Strings (casio friendly)
-for x in splitted:
+#for x in splitted:
+"""
     is_string = False
-    word = ""
-    WORD_TO_FIND = "->"
-    for i in range(len(x)-1):
-        if x[i] == "\"": is_string = not is_string
-        word += x[i]
-        wfi = word.find(WORD_TO_FIND)
-        if wfi > 0 and not is_string:
-            content, variable_temp = x[:wfi], x[wfi+len(WORD_TO_FIND):]
-            variable = ""
-            for char in variable_temp:
-                if char == " ": break
-                variable += char
-
-            if variable.endswith("]"): break # gotta implement this tho
-
-            var_index = list(variables.keys()).index(variable)
+    line = ""
+    for word in x.split(" "):
+        if word == "\"": is_string = not is_string
+        if is_string: continue
+        print(word)
+        if word in list(variables.keys()):
+            var_index = list(variables.keys()).index(word)
             out_variable = list(out_variables.keys())[var_index]
 
-            print(variable + " wird zu " + out_variable)
+            print("Replacing " + word + " with " + out_variable)
 
-            break
+            word = out_variable
+
+        line += word + " "
+
+    cache.append(line)
+"""
+for x in splitted:
+    for WORD_TO_FIND in ["->", "="]:
+        is_string = False
+        word = ""
+        #WORD_TO_FIND = "->"
+        for i in range(len(x)-1): # gotta change this to not "->" but all words in the line and then replace everything that is a variable with its dum name (casio friendly)
+            if x[i] == "\"": is_string = not is_string
+            word += x[i]
+            wfi = word.find(WORD_TO_FIND)
+            if wfi > 0 and not is_string:
+                content, variable_temp = x[:wfi], x[wfi+len(WORD_TO_FIND):]
+                variable = ""
+                for char in variable_temp:
+                    if char == " ": break
+                    variable += char
+
+                if variable.endswith("]"): break # gotta implement this tho
+
+                var_index = list(variables.keys()).index(variable)
+                out_variable = list(out_variables.keys())[var_index]
+
+                print(variable + " wird zu " + out_variable)
+
+                all_after_var = x[wfi+len(WORD_TO_FIND)+len(variable):]
+
+                x = content + "->" + out_variable + all_after_var
+
+                break
 
     cache.append(x)
 
 splitted = cache
 cache = []
+
+print(splitted)
+print()
 
 # Un-pretty-fie If-Else statements
 prev_line = ""
