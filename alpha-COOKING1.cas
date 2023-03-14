@@ -1,8 +1,5 @@
-1000->A
-0->TestVarA
-0->NextVar
-1->ABC
-2000->LastOne
+0->ABC
+0->A
 0->B
 5->C
 0->D
@@ -30,6 +27,8 @@
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}->List2
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}->List3
 {21,1,1,0}->SneakyList
+
+1000->ABC
 
 While K<>47 # Same line comment test
   K->J
@@ -190,21 +189,21 @@ While K<>47 # Same line comment test
     Y->W
   IfEnd
 
-#  # Animate animations from List4
-#  For 1->I To Dim List4 Step 4
+#  # Animate animations from SneakyList (was List 4)
+  For 1->I To Dim SneakyList Step 4
 #    # Duration of animation
 #    I+3->B
-#    List4[B]->A
+#    SneakyList[B]->A
 #    # If A >= 0 then decrease; else do nothing (=stopped animation)
 #    A-1->A
-#    A>-1=>A->List4[B]
+#    A>-1=>A->SneakyList[B]
 #    # Animation is still running
 #    If A>0
 #      # Get animation type
 #      I+2->B
-#      List4[B]->A
+#      SneakyList[B]->A
 #    IfEnd
-#  Next
+  Next
 
   # Render world (mainly used once)
   If R=1

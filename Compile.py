@@ -21,9 +21,9 @@ def fill_space(string, length = 2):
     return " " * (length - len(string)) + string
 
 for x in splitted:
-    # Remove space prefixes
-    while x.startswith(" "):
-        x = x.removeprefix(" ")
+    # Remove space pre- and suffixes
+    while x.startswith(" "): x = x.removeprefix(" ")
+    while x.endswith(" "): x = x.removesuffix(" ")
 
     # Remove comments
     is_string = False
@@ -44,13 +44,24 @@ for x in splitted:
         word += x[i]
         wfi = word.find(WORD_TO_FIND)
         if wfi > 0 and not is_string:
-            content, variable = x[:wfi], x[wfi+len(WORD_TO_FIND):]
-            variable = variable.split(" ")[0]
+            #content, variable = x[:wfi], x[wfi+len(WORD_TO_FIND):]
+            #variable = variable.split(" ")[0]
+            content, variable_temp = x[:wfi], x[wfi+len(WORD_TO_FIND):]
+            variable = ""
+            for char in variable_temp:
+                if char == " ": break
+                variable += char
+
             if variable.endswith("]"): break
             if variable not in variables: variables.update({variable: content})
             break
 
     cache.append(x)
+
+splitted = cache
+cache = []
+
+#print(splitted)
 
 for variable in variables:
     content = variables[variable]
@@ -67,6 +78,37 @@ for variable in variables:
         out_variables.update({ALLOWED_VARIABLE_NAMES[variable_stats["numeric"]]: content})
 
         variable_stats["numeric"] += 1
+
+print(variables)
+print()
+print(out_variables)
+
+# Replace variable names with ALLOWED_VARIABLE_NAMES / Lists / Strings (casio friendly)
+for x in splitted:
+    is_string = False
+    word = ""
+    WORD_TO_FIND = "->"
+    for i in range(len(x)-1):
+        if x[i] == "\"": is_string = not is_string
+        word += x[i]
+        wfi = word.find(WORD_TO_FIND)
+        if wfi > 0 and not is_string:
+            content, variable_temp = x[:wfi], x[wfi+len(WORD_TO_FIND):]
+            variable = ""
+            for char in variable_temp:
+                if char == " ": break
+                variable += char
+
+            if variable.endswith("]"): break # gotta implement this tho
+
+            var_index = list(variables.keys()).index(variable)
+            out_variable = list(out_variables.keys())[var_index]
+
+            print(variable + " wird zu " + out_variable)
+
+            break
+
+    cache.append(x)
 
 splitted = cache
 cache = []
