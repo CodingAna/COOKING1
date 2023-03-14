@@ -5,3 +5,10 @@ A simple version of Overcooked 2 for the Casio fx-CG50 written in CASIO BASIC wi
 Run `python3 AdvancedCompile.py` to create the `COOKING1.txt` file. This needs to be copied to the calculators main storage (`@MainMem/PROGRAMS/`)
 
 **Experimental**: Run `python3 Schema2List.py` to create the `Level1.list` file. This is kinda experimental because the calculator has constant values instead of a custom lookup-table. **Use with caution!**
+
+## New compiler
+The new compiler `Compiler.py` can store variables (numeric, strings and lists) with custom names (i.e. "CurrentPlayerX") to improve quality of code (readability, maintainability).
+
+*Currently under development, might misbehave*
+
+**Use with caution!**
