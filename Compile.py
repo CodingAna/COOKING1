@@ -7,6 +7,7 @@ start = time.time()
 
 ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ "
 ALLOWED_VARIABLE_NAMES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+ALLOWED_VARIABLE_NAMES_PRECOMP = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_" # 0 would be an allowed variable but I am too lazy to fix this (allow numeric values only after at least one character)
 
 variable_stats = {"numeric": 0, "string": 0, "list": 0}
 variables = {}
@@ -105,7 +106,32 @@ print()
 
     cache.append(line)
 """
-for x in splitted:
+for i in range(len(splitted)):
+    x = splitted[i]
+    is_string = False
+    word = ""
+    for j in range(len(x)):
+        if x[j] == "\"": is_string = not is_string
+        if is_string: continue
+        if x[j] in ALLOWED_VARIABLE_NAMES_PRECOMP:
+            word += x[j]
+            continue
+        if variables.get(word) == None:
+            word = ""
+            continue
+
+        var_index = list(variables.keys()).index(word)
+        out_variable = list(out_variables.keys())[var_index]
+        replaced_x = x[:j-len(word)] + out_variable + x[j+len(out_variable)-1:]
+        print(replaced_x)
+        x = replaced_x
+        word = ""
+        break
+
+    cache.append(x)
+
+    continue
+"""
     for WORD_TO_FIND in ["=", "->"]:
         is_string = False
         word = ""
@@ -140,6 +166,7 @@ for x in splitted:
         except: continue
 
     cache.append(x)
+"""
 
 splitted = cache
 cache = []
