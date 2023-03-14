@@ -29,7 +29,7 @@
 {21,1,1,0}->SneakyList
 
 1000->ABC
-If ABC=100
+If ABC=1000
   Locate 1,2,"YURRR"
 IfEnd
 

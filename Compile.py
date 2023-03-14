@@ -106,33 +106,38 @@ print()
     cache.append(line)
 """
 for x in splitted:
-    for WORD_TO_FIND in ["->", "="]:
+    for WORD_TO_FIND in ["=", "->"]:
         is_string = False
         word = ""
         #WORD_TO_FIND = "->"
-        for i in range(len(x)-1): # gotta change this to not "->" but all words in the line and then replace everything that is a variable with its dum name (casio friendly)
-            if x[i] == "\"": is_string = not is_string
-            word += x[i]
-            wfi = word.find(WORD_TO_FIND)
-            if wfi > 0 and not is_string:
-                content, variable_temp = x[:wfi], x[wfi+len(WORD_TO_FIND):]
-                variable = ""
-                for char in variable_temp:
-                    if char == " ": break
-                    variable += char
+        try:
+            for i in range(len(x)-1): # gotta change this to not "->" but all words in the line and then replace everything that is a variable with its dum name (casio friendly)
+                if x[i] == "\"": is_string = not is_string
+                word += x[i]
+                wfi = word.find(WORD_TO_FIND)
+                if "=" in word: print(word + ", " + str(wfi) + " *****************")
+                if wfi > 0 and not is_string:
+                    content, variable_temp = x[:wfi], x[wfi+len(WORD_TO_FIND):]
+                    # content might be a variable too. see line 32 in alpha-COOKING1.cas (If ABC=1000)
+                    print([content, variable_temp])
+                    variable = ""
+                    for char in variable_temp:
+                        if char == " ": break
+                        variable += char
 
-                if variable.endswith("]"): break # gotta implement this tho
+                    if variable.endswith("]"): break # gotta implement this tho
 
-                var_index = list(variables.keys()).index(variable)
-                out_variable = list(out_variables.keys())[var_index]
+                    var_index = list(variables.keys()).index(variable)
+                    out_variable = list(out_variables.keys())[var_index]
 
-                print(variable + " wird zu " + out_variable)
+                    print(variable + " wird zu " + out_variable)
 
-                all_after_var = x[wfi+len(WORD_TO_FIND)+len(variable):]
+                    all_after_var = x[wfi+len(WORD_TO_FIND)+len(variable):]
 
-                x = content + "->" + out_variable + all_after_var
+                    x = content + WORD_TO_FIND + out_variable + all_after_var
 
-                break
+                    break
+        except: continue
 
     cache.append(x)
 
