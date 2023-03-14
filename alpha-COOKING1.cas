@@ -1,0 +1,255 @@
+1000->A
+0->TestVarA
+0->NextVar
+1->ABC
+2000->LastOne
+0->B
+5->C
+0->D
+0->G
+0->H
+0->I
+0->J
+0->K
+0->N
+0->O
+0->P
+0->Q
+1->R
+0->S
+11->T
+4->U
+0->V
+0->W
+13->X
+4->Y
+0->Z
+
+# Level1
+{0,1,1,3,1,3,1,3,1,1,0,0,0,0,0,0,0,6,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,2,0,0,0,0,2,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,1,3,1,1,3,1,0,0,0,0,0,0,0,0,0,0}->List1
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}->List2
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}->List3
+{21,1,1,0}->SneakyList
+
+While K<>47 # Same line comment test
+  K->J
+  Getkey->K
+
+  If K<>0 And K=J
+    I+1->I
+  Else
+    0->I
+  IfEnd
+
+  If I>1
+    1->I
+    If K=27 And X<21
+      1->D
+      T+1->T
+    IfEnd
+    If K=38 And X>1
+      3->D
+      T-1->T
+    IfEnd
+    If K=37 And Y<7
+      2->D
+      U+1->U
+    IfEnd
+    If K=28 And Y>1
+      0->D
+      U-1->U
+    IfEnd
+  IfEnd
+
+  # If alpha pick up or drop
+  If K=77 And J<>77
+    21*(Y-1)+X->P
+    D=0=>P-21->P
+    D=1=>P+1->P
+    D=2=>P+21->P
+    D=3=>P-1->P
+    List1[P]->A
+    List2[P]->Z
+    List3[P]->B
+    If Z=0
+      If A=5
+        If G=-1
+          O+1->O
+        Else
+          N+1->N
+        IfEnd
+        0->G
+        0->H
+      Else
+        If A<>0
+          G->List3[P]
+          H->List2[P]
+          If H<>0 And A<>2
+            H=2=>Green Locate MOD(P,21),(Int (P/21)+1),"_#E6A0_"
+            H=3=>Red Locate MOD(P,21),(Int (P/21)+1),"@"
+          IfEnd
+          0->G
+          0->H
+        IfEnd
+      IfEnd
+    Else
+      If H=0
+        B->G
+        Z->H
+
+        List1[P]->S
+
+        If S=1
+          Locate MOD(P,21),(Int (P/21)+1),"_#E6A5_"
+        Else
+          If S=2
+            List2[P]->A
+            # A=2: Lettuce
+            A=2=>Green Locate MOD(P,21),(Int (P/21)+1),"_#E6A7_"
+            A=3=>Red Locate MOD(P,21),(Int (P/21)+1),"_#E6A7_"
+          Else
+            If S=3
+              Yellow Locate MOD(P,21),(Int (P/21)+1),"_#E59E_"
+            Else
+              If S=4
+                Locate MOD(P,21),(Int (P/21)+1),"_#E6A3_"
+              Else
+                If S=5
+                  Cyan Locate MOD(P,21),(Int (P/21)+1),"_#E6A9_"
+                Else
+                  If S=6
+                    Locate MOD(P,21),(Int (P/21)+1),"_#E6A4_"
+                  IfEnd
+                IfEnd
+              IfEnd
+            IfEnd
+          IfEnd
+        IfEnd
+
+        If A<>2
+          0->List3[P]
+          0->List2[P]
+        IfEnd
+      Else
+        If A=2
+          0->G
+          0->H
+        IfEnd
+      IfEnd
+    IfEnd
+
+    Locate 21,6,G
+    Locate 21,7,H
+  IfEnd
+
+  # If shifting (chopping)
+  If K=78 And J<>78
+    21*(Y-1)+X->P
+    D=0=>P-21->P
+    D=1=>P+1->P
+    D=2=>P+21->P
+    D=3=>P-1->P
+    List1[P]->A
+    List2[P]->B
+    List3[P]->Z
+
+    # A=3 is cutting board
+    If A=3
+      # If not already chopped up
+      If Z>-1
+        # If not air nor plate
+        If B>1
+          If Z+2>C
+            -1->List3[P]
+          Else
+            Z+1->List3[P]
+          IfEnd
+        IfEnd
+      IfEnd
+    IfEnd
+
+    Locate 21,6,List3[P]
+  IfEnd
+
+  # Hitbox check (only move if air)
+  21*(U-1)+T->P
+  List1[P]->Z
+  If Z=0
+    T->X
+    U->Y
+  Else
+    X->T
+    Y->U
+  IfEnd
+
+  # Re-draw player if moved
+  If X<>V Or Y<>W
+    X<>0 And Y<>0=>Cyan Locate X,Y,"_#E6A4_"
+    V<>0 And W<>0=>Locate V,W," "
+    X->V
+    Y->W
+  IfEnd
+
+#  # Animate animations from List4
+#  For 1->I To Dim List4 Step 4
+#    # Duration of animation
+#    I+3->B
+#    List4[B]->A
+#    # If A >= 0 then decrease; else do nothing (=stopped animation)
+#    A-1->A
+#    A>-1=>A->List4[B]
+#    # Animation is still running
+#    If A>0
+#      # Get animation type
+#      I+2->B
+#      List4[B]->A
+#    IfEnd
+#  Next
+
+  # Render world (mainly used once)
+  If R=1
+    0->R
+    0->P
+    1->Q
+    For 1->I To Dim List1
+      P+1->P
+      If P>21
+        1->P
+        Q+1->Q
+      IfEnd
+      List1[I]->S
+      S=0=>Next
+      # I truly hate this but it's faster. Anywho.
+      If S=1
+        Locate P,Q,"_#E6A5_"
+      Else
+        If S=2
+          List2[I]->A
+          # A=2: Lettuce
+          A=2=>Green Locate P,Q,"_#E6A7_"
+          A=3=>Red Locate P,Q,"_#E6A7_"
+        Else
+          If S=3
+            Yellow Locate P,Q,"_#E59E_"
+          Else
+            If S=4
+              Locate P,Q,"_#E6A3_"
+            Else
+              If S=5
+                Cyan Locate P,Q,"_#E6A9_"
+              Else
+                If S=6
+                  Locate P,Q,"_#E6A4_"
+                IfEnd
+              IfEnd
+            IfEnd
+          IfEnd
+        IfEnd
+      IfEnd
+    # My eyes are burning
+    Next
+  IfEnd
+  0->R
+WhileEnd
+ClrText
+Locate 1,4,"      Game Over      "
