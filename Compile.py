@@ -7,10 +7,7 @@ start = time.time()
 
 ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ "
 ALLOWED_VARIABLE_NAMES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-SYS_CMDS = [ # unused
-    "Getkey",
-    ""
-]
+
 variable_stats = {"numeric": 0, "string": 0, "list": 0}
 variables = {}
 out_variables = {}
@@ -22,8 +19,6 @@ cache = []
 def fill_space(string, length = 2):
     string = str(string)
     return " " * (length - len(string)) + string
-
-# Make custom variables (i.e. "CurrentX" translates to any available letter i.e. "R")
 
 for x in splitted:
     # Remove space prefixes
@@ -52,12 +47,10 @@ for x in splitted:
             content, variable = x[:wfi], x[wfi+len(WORD_TO_FIND):]
             variable = variable.split(" ")[0]
             if variable.endswith("]"): break
-            if variable not in variables: variables.update({variable: content}) #variables.append(variable)
+            if variable not in variables: variables.update({variable: content})
             break
 
     cache.append(x)
-
-#print(variables)
 
 for variable in variables:
     content = variables[variable]
@@ -75,37 +68,29 @@ for variable in variables:
 
         variable_stats["numeric"] += 1
 
-#print(out_variables)
-
 splitted = cache
 cache = []
 
-try:
-    # Un-pretty-fie If-Else statements
-    prev_line = ""
-    for i in range(len(splitted)):
-        x = splitted[i]
-        if prev_line.startswith("Else") and prev_line != "Else":
-            cache[i] = x
-            prev_line = x
-            continue
-
-        if prev_line.startswith("If ") or prev_line.startswith("Then If "):
-            x = "Then " + x
-        elif prev_line.startswith("Else"):
-            if prev_line != "Else": exit(f"Else not aligned correctly. (line {str(i-1)})")
-            cache[-1] += " " + x
-            x = splitted[i]
-            prev_line = x
-            continue
-
-        cache.append(x)
+# Un-pretty-fie If-Else statements
+prev_line = ""
+for i in range(len(splitted)):
+    x = splitted[i]
+    if prev_line.startswith("Else") and prev_line != "Else":
+        cache[i] = x
         prev_line = x
-except:
-    print("Error")
-    print(i)
-    print(prev_line)
-    print(x)
+        continue
+
+    if prev_line.startswith("If ") or prev_line.startswith("Then If "):
+        x = "Then " + x
+    elif prev_line.startswith("Else"):
+        if prev_line != "Else": exit(f"Else not aligned correctly. (line {str(i-1)})")
+        cache[-1] += " " + x
+        x = splitted[i]
+        prev_line = x
+        continue
+
+    cache.append(x)
+    prev_line = x
 
 splitted = cache
 cache = []
